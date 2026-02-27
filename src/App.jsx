@@ -1,10 +1,10 @@
 import React from "react";
-import Header from "./components/Header.js";
-import Body from "./components/Body";
+import Header from "./components/Header.jsx";
+import Body from "./components/Body.jsx";
 import { Routes, Route } from "react-router-dom";
-import Footer from "./components/Footer";
-import Echoes from "./pages/Echoes";
-import PagineColori from "./pages/PagineColori";
+import Footer from "./components/Footer.jsx";
+import Echoes from "./pages/Echoes.jsx";
+import PagineColori from "./pages/PagineColori.jsx";
 
 function App() {
   return (
