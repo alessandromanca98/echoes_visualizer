@@ -3,13 +3,13 @@ import React from "react";
 function ImageCarousel({ folderName, images, currentIndex, setCurrentIndex}) {
   const goNext = () => {
     setCurrentIndex((prev) =>
-      prev === images.length - 1 ? 0 : prev + 1
+      prev === images.length - 1 ? prev : prev + 1
     );
   };
 
   const goPrev = () => {
     setCurrentIndex((prev) =>
-      prev === 0 ? images.length - 1 : prev - 1
+      prev === 0 ? 0 : prev - 1
     );
   };
 
