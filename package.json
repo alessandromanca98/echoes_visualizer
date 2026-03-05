@@ -8,7 +8,8 @@
     "ajv": "^8.18.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "react-router-dom": "^7.13.0"
+    "react-router-dom": "^7.13.0",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.7.0",
@@ -19,7 +20,8 @@
     "start": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "generate-images": "node scripts/generate-manifests.js"
+    "generate-images": "node scripts/generate-manifests.js",
+    "to-webp": "node scripts/convert-to-webp.js"
   },
   "browserslist": [
     ">0.2%",

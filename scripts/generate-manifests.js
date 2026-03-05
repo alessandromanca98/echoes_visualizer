@@ -4,7 +4,7 @@ const path = require("path");
 const imagesRoot = path.join(__dirname, "../public/images");
 
 // Estensioni consentite
-const validExtensions = [".jpg", ".jpeg", ".png", ".webp", ".svg"];
+const validExtensions = [".webp"];
 
 function generateManifestForFolder(folderPath) {
   const files = fs.readdirSync(folderPath);
