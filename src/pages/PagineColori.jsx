@@ -3,7 +3,7 @@ import ImageGallery from "../components/ImageGallery";
 import SubMenu from "../components/SubMenu";
 import ImageCarousel from "../components/ImageCarousel";
 
-function PagineColori() {
+function PagineColori({onPageChange, setTotalPages, showBar}) {
   const [verticalScroll, setVerticalScroll] = useState(() => {
     const saved = localStorage.getItem("colori_verticalScroll");
     return saved !== null ? JSON.parse(saved) : true;
@@ -45,8 +45,15 @@ function PagineColori() {
           setCurrentIndex={setCurrentIndex}
         />
         {verticalScroll ? (
-          <ImageGallery folderName="colori" images={images} setImages={setImages}/>
-        ) : (
+          <ImageGallery 
+            folderName="echoes" 
+            images={images} 
+            setImages={setImages} 
+            onPageChange={onPageChange} 
+            setTotalPages={setTotalPages}
+            showBar={showBar}
+          />
+          ) : (
           <ImageCarousel folderName="colori" 
             images={images}
             currentIndex={currentIndex}

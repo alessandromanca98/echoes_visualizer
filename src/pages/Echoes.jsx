@@ -3,7 +3,7 @@ import ImageGallery from "../components/ImageGallery";
 import SubMenu from "../components/SubMenu";
 import ImageCarousel from "../components/ImageCarousel";
 
-function Echoes() {
+function Echoes({onPageChange, setTotalPages, showBar}) {
   const [verticalScroll, setVerticalScroll] = useState(() => {
     const saved = localStorage.getItem("echoes_verticalScroll");
     return saved !== null ? JSON.parse(saved) : true;
@@ -48,7 +48,14 @@ function Echoes() {
           setCurrentIndex={setCurrentIndex}
         />
         {verticalScroll ? (
-          <ImageGallery folderName="echoes" images={images} setImages={setImages}/>
+          <ImageGallery 
+          folderName="echoes" 
+          images={images} 
+          setImages={setImages} 
+          onPageChange={onPageChange} 
+          setTotalPages={setTotalPages}
+          showBar={showBar}
+          />
         ) : (
           <ImageCarousel folderName="echoes"
             images={images}
