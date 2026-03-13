@@ -22,7 +22,7 @@ async function convertToWebP(folder){
         const outputFile = `${fileName}.webp`
       
         await sharp(path.join(imagesRoot, folder, i))
-          .webp({ quality: 85 })
+          .webp({ quality: 60 })
           .toFile(path.join(imagesRoot, folder, outputFile));
 
           fs.unlinkSync(path.join(imagesRoot, folder, i))

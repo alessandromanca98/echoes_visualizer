@@ -46,7 +46,7 @@ function PagineColori({onPageChange, setTotalPages, showBar}) {
         />
         {verticalScroll ? (
           <ImageGallery 
-            folderName="echoes" 
+            folderName="colori" 
             images={images} 
             setImages={setImages} 
             onPageChange={onPageChange} 
