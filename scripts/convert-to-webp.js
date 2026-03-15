@@ -1,4 +1,4 @@
-//npm run convert-to-webp -- --f echoes
+//npm run to-webp -- --f echoes
 const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
