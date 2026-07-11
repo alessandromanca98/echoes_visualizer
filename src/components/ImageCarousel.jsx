@@ -24,7 +24,9 @@ function ImageCarousel({ folderName, images, currentIndex, setCurrentIndex }) {
     setCurrentIndex((prev) => prev === 0 ? 0 : prev - 1);
   };
 
-  if (images.length === 0) return <p>Caricamento...</p>;
+  if (images.length === 0) return <p className="loading-text">Caricamento...</p>;
+
+  const btnStyle = { opacity: buttonsVisible ? 1 : 0, transition: "opacity 0.4s ease" };
 
   return (
     <div
@@ -36,9 +38,12 @@ function ImageCarousel({ folderName, images, currentIndex, setCurrentIndex }) {
       <button
         className="carousel-btn left"
         onClick={goPrev}
-        style={{ opacity: buttonsVisible ? 1 : 0, transition: "opacity 0.4s ease" }}
+        aria-label="Pagina precedente"
+        style={btnStyle}
       >
-        ❮
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
       </button>
       <img
         src={`/images/${folderName}/${images[currentIndex]}`}
@@ -48,9 +53,12 @@ function ImageCarousel({ folderName, images, currentIndex, setCurrentIndex }) {
       <button
         className="carousel-btn right"
         onClick={goNext}
-        style={{ opacity: buttonsVisible ? 1 : 0, transition: "opacity 0.4s ease" }}
+        aria-label="Pagina successiva"
+        style={btnStyle}
       >
-        ❯
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
       </button>
     </div>
   );
