@@ -4,17 +4,30 @@ function ImageCarousel({ folderName, images, currentIndex, setCurrentIndex }) {
   const [buttonsVisible, setButtonsVisible] = useState(true);
   const hideTimer = useRef(null);
 
+  const hideButtons = () => {
+    clearTimeout(hideTimer.current);
+    setButtonsVisible(false);
+  };
+
   const showButtons = () => {
     setButtonsVisible(true);
     clearTimeout(hideTimer.current);
-    hideTimer.current = setTimeout(() => setButtonsVisible(false), 2000);
+    hideTimer.current = setTimeout(() => setButtonsVisible(false), 1000);
   };
 
-  // Nascondi dopo 2s al mount
   useEffect(() => {
-    hideTimer.current = setTimeout(() => setButtonsVisible(false), 2000);
+    hideTimer.current = setTimeout(() => setButtonsVisible(false), 1000);
     return () => clearTimeout(hideTimer.current);
   }, []);
+
+  useEffect(() => {
+    if (!buttonsVisible) return;
+    const handlePointerDown = (e) => {
+      if (!e.target.closest(".carousel-btn")) hideButtons();
+    };
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [buttonsVisible]);
 
   const goNext = () => {
     setCurrentIndex((prev) => prev === images.length - 1 ? prev : prev + 1);

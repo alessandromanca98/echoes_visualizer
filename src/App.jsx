@@ -1,4 +1,4 @@
-import {React, useState, useRef, useCallback} from "react";
+import {React, useState, useRef, useCallback, useEffect} from "react";
 import Header from "./components/Header.jsx";
 import { Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer.jsx";
@@ -11,11 +11,25 @@ function App() {
   const [barVisible, setBarVisible] = useState(false);
   const hideTimer = useRef(null);
 
+  const hideBar = useCallback(() => {
+    clearTimeout(hideTimer.current);
+    setBarVisible(false);
+  }, []);
+
   const showBar = useCallback(() => {
     setBarVisible(true);
     clearTimeout(hideTimer.current);
-    hideTimer.current = setTimeout(() => setBarVisible(false), 2000);
+    hideTimer.current = setTimeout(() => setBarVisible(false), 1000);
   }, []);
+
+  useEffect(() => {
+    if (!barVisible) return;
+    const handlePointerDown = (e) => {
+      if (!e.target.closest(".gallery-bar")) hideBar();
+    };
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [barVisible, hideBar]);
 
   const handlePageChange = useCallback((page) => {
     setCurrentPage(page);
