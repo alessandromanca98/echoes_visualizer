@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ImageGallery from "../components/ImageGallery";
 import SubMenu from "../components/SubMenu";
 import ImageCarousel from "../components/ImageCarousel";
+import { useFullscreen } from "../hooks/useFullscreen";
 
 function PagineColori({onPageChange, setTotalPages, showBar}) {
   const [verticalScroll, setVerticalScroll] = useState(() => {
@@ -15,6 +16,8 @@ function PagineColori({onPageChange, setTotalPages, showBar}) {
     const saved = localStorage.getItem("colori_currentIndex");
     return saved !== null ? JSON.parse(saved) : 0;
   });
+
+  const { isFullscreen, toggleFullscreen } = useFullscreen();
 
   useEffect(() => {
     localStorage.setItem("colori_verticalScroll", JSON.stringify(verticalScroll));
@@ -34,6 +37,10 @@ function PagineColori({onPageChange, setTotalPages, showBar}) {
     loadImages();
   }, []);
 
+  useEffect(() => {
+    if (images.length > 0) setTotalPages?.(images.length);
+  }, [images, setTotalPages]);
+
   return (
     <div>
       <div className="gallery-wrapper">
@@ -43,6 +50,8 @@ function PagineColori({onPageChange, setTotalPages, showBar}) {
           images={images}
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
+          isFullscreen={isFullscreen}
+          onToggleFullscreen={toggleFullscreen}
         />
         {verticalScroll ? (
           <ImageGallery 
@@ -58,6 +67,8 @@ function PagineColori({onPageChange, setTotalPages, showBar}) {
             images={images}
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}
+            onPageChange={onPageChange}
+            showBar={showBar}
           />
         )}
       </div>

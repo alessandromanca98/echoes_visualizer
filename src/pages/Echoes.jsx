@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ImageGallery from "../components/ImageGallery";
 import SubMenu from "../components/SubMenu";
 import ImageCarousel from "../components/ImageCarousel";
+import { useFullscreen } from "../hooks/useFullscreen";
 
 function Echoes({onPageChange, setTotalPages, showBar}) {
   const [verticalScroll, setVerticalScroll] = useState(() => {
@@ -15,6 +16,8 @@ function Echoes({onPageChange, setTotalPages, showBar}) {
     const saved = localStorage.getItem("echoes_currentIndex");
     return saved !== null ? JSON.parse(saved) : 0;
   });
+
+  const { isFullscreen, toggleFullscreen } = useFullscreen();
 
   // Persisti verticalScroll su localStorage quando cambia
   useEffect(() => {
@@ -37,6 +40,10 @@ function Echoes({onPageChange, setTotalPages, showBar}) {
     loadImages();
   }, []);
 
+  useEffect(() => {
+    if (images.length > 0) setTotalPages?.(images.length);
+  }, [images, setTotalPages]);
+
   return (
     <div>
       <div className="gallery-wrapper">
@@ -46,6 +53,8 @@ function Echoes({onPageChange, setTotalPages, showBar}) {
           images={images}
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
+          isFullscreen={isFullscreen}
+          onToggleFullscreen={toggleFullscreen}
         />
         {verticalScroll ? (
           <ImageGallery 
@@ -61,6 +70,8 @@ function Echoes({onPageChange, setTotalPages, showBar}) {
             images={images}
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}
+            onPageChange={onPageChange}
+            showBar={showBar}
           />
         )}
       </div>
