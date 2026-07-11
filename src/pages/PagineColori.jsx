@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; 
+import React, { useState, useEffect, useLayoutEffect } from "react"; 
 import ImageGallery from "../components/ImageGallery";
 import SubMenu from "../components/SubMenu";
 import ImageCarousel from "../components/ImageCarousel";
@@ -23,7 +23,7 @@ function PagineColori({onPageChange, setTotalPages, showBar, setVerticalScroll: 
     localStorage.setItem("colori_verticalScroll", JSON.stringify(verticalScroll));
   }, [verticalScroll]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setVerticalScrollMode?.(verticalScroll);
   }, [verticalScroll, setVerticalScrollMode]);
 
@@ -72,7 +72,6 @@ function PagineColori({onPageChange, setTotalPages, showBar, setVerticalScroll: 
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}
             onPageChange={onPageChange}
-            showBar={showBar}
           />
         )}
       </div>

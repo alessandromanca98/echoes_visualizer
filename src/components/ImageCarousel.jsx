@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function ImageCarousel({ folderName, images, currentIndex, setCurrentIndex, onPageChange, showBar }) {
+function ImageCarousel({ folderName, images, currentIndex, setCurrentIndex, onPageChange }) {
   const [buttonsVisible, setButtonsVisible] = useState(true);
   const hideTimer = useRef(null);
 
@@ -35,12 +35,10 @@ function ImageCarousel({ folderName, images, currentIndex, setCurrentIndex, onPa
 
   const goNext = () => {
     setCurrentIndex((prev) => prev === images.length - 1 ? prev : prev + 1);
-    showBar?.();
   };
 
   const goPrev = () => {
     setCurrentIndex((prev) => prev === 0 ? 0 : prev - 1);
-    showBar?.();
   };
 
   if (images.length === 0) return <p className="loading-text">Caricamento...</p>;

@@ -34,8 +34,12 @@ function App() {
 
   const handlePageChange = useCallback((page) => {
     setCurrentPage(page);
-    showBar();
-  }, [showBar]);
+    if (verticalScroll) showBar();
+  }, [showBar, verticalScroll]);
+
+  useEffect(() => {
+    if (!verticalScroll) hideBar();
+  }, [verticalScroll, hideBar]);
 
   const scrollToTop = () => {
     const container = document.querySelector(".gallery-container");

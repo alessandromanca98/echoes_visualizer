@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; 
+import React, { useState, useEffect, useLayoutEffect } from "react"; 
 import ImageGallery from "../components/ImageGallery";
 import SubMenu from "../components/SubMenu";
 import ImageCarousel from "../components/ImageCarousel";
@@ -24,7 +24,7 @@ function Echoes({onPageChange, setTotalPages, showBar, setVerticalScroll: setVer
     localStorage.setItem("echoes_verticalScroll", JSON.stringify(verticalScroll));
   }, [verticalScroll]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setVerticalScrollMode?.(verticalScroll);
   }, [verticalScroll, setVerticalScrollMode]);
 
@@ -75,7 +75,6 @@ function Echoes({onPageChange, setTotalPages, showBar, setVerticalScroll: setVer
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}
             onPageChange={onPageChange}
-            showBar={showBar}
           />
         )}
       </div>
