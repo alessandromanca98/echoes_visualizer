@@ -4,7 +4,7 @@ import SubMenu from "../components/SubMenu";
 import ImageCarousel from "../components/ImageCarousel";
 import { useFullscreen } from "../hooks/useFullscreen";
 
-function Echoes({onPageChange, setTotalPages, showBar}) {
+function Echoes({onPageChange, setTotalPages, showBar, setVerticalScroll: setVerticalScrollMode}) {
   const [verticalScroll, setVerticalScroll] = useState(() => {
     const saved = localStorage.getItem("echoes_verticalScroll");
     return saved !== null ? JSON.parse(saved) : true;
@@ -23,6 +23,10 @@ function Echoes({onPageChange, setTotalPages, showBar}) {
   useEffect(() => {
     localStorage.setItem("echoes_verticalScroll", JSON.stringify(verticalScroll));
   }, [verticalScroll]);
+
+  useEffect(() => {
+    setVerticalScrollMode?.(verticalScroll);
+  }, [verticalScroll, setVerticalScrollMode]);
 
   // Persisti currentIndex su localStorage quando cambia
   useEffect(() => {

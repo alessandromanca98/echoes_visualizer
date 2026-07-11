@@ -4,7 +4,7 @@ import SubMenu from "../components/SubMenu";
 import ImageCarousel from "../components/ImageCarousel";
 import { useFullscreen } from "../hooks/useFullscreen";
 
-function PagineColori({onPageChange, setTotalPages, showBar}) {
+function PagineColori({onPageChange, setTotalPages, showBar, setVerticalScroll: setVerticalScrollMode}) {
   const [verticalScroll, setVerticalScroll] = useState(() => {
     const saved = localStorage.getItem("colori_verticalScroll");
     return saved !== null ? JSON.parse(saved) : true;
@@ -22,6 +22,10 @@ function PagineColori({onPageChange, setTotalPages, showBar}) {
   useEffect(() => {
     localStorage.setItem("colori_verticalScroll", JSON.stringify(verticalScroll));
   }, [verticalScroll]);
+
+  useEffect(() => {
+    setVerticalScrollMode?.(verticalScroll);
+  }, [verticalScroll, setVerticalScrollMode]);
 
   useEffect(() => {
     localStorage.setItem("colori_currentIndex", JSON.stringify(currentIndex));
