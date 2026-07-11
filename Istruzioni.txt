@@ -1,0 +1,7 @@
+PER AGGIORNARE LE PAGINE:
+1) Copia incollare i file .png in public/images/<cartella>/
+2) Eseguire il comando di conversione in webp sulla cartella desiderata
+    Es: npm run to-webp --folder echoes
+3) Eseguire il comando di rigenerazione del manifest.json sulla cartella desiderata
+    Es: npm run generate-images --folder echoes
+4) Eseguire build del progetto per mettere i file in dist.
